@@ -23,7 +23,7 @@
 //
 //---------------------------------------------------------------------------------
 //
-// Version 2.7beta0
+// Version 2.6
 //
 
 #ifndef _lcms2_H
@@ -75,7 +75,7 @@ extern "C" {
 #endif
 
 // Version/release
-#define LCMS_VERSION        2070
+#define LCMS_VERSION        2060
 
 // I will give the chance of redefining basic types for compilers that are not fully C99 compliant
 #ifndef CMS_BASIC_TYPES_ALREADY_DEFINED
@@ -184,17 +184,25 @@ typedef int                  cmsBool;
 #   define CMS_USE_BIG_ENDIAN   1
 #endif
 
+#  ifdef TARGET_CPU_PPC
+#    if TARGET_CPU_PPC
+#      define CMS_USE_BIG_ENDIAN   1
+#    endif
+#  endif
 
 #if defined(__powerpc__) || defined(__ppc__) || defined(TARGET_CPU_PPC)
-#  if __powerpc__ || __ppc__ || TARGET_CPU_PPC
 #   define CMS_USE_BIG_ENDIAN   1
-#   if defined (__GNUC__) && defined(__BYTE_ORDER__) && defined(__ORDER_LITTLE_ENDIAN__)
-#       if __BYTE_ORDER__  == __ORDER_LITTLE_ENDIAN__
-                // Don't use big endian for PowerPC little endian mode
+#   if defined (__GNUC__) && defined(__BYTE_ORDER) && defined(__LITTLE_ENDIAN)
+#       if __BYTE_ORDER  == __LITTLE_ENDIAN
+//               // Don't use big endian for PowerPC little endian mode
 #                undef CMS_USE_BIG_ENDIAN
 #       endif
-#     endif
 #   endif
+#endif
+
+// WORDS_BIGENDIAN takes precedence
+#if defined(_HOST_BIG_ENDIAN) || defined(__BIG_ENDIAN__) || defined(WORDS_BIGENDIAN)
+#   define CMS_USE_BIG_ENDIAN      1
 #endif
 
 #ifdef macintosh
@@ -205,12 +213,6 @@ typedef int                  cmsBool;
 #   undef CMS_USE_BIG_ENDIAN
 # endif
 #endif
-
-// WORDS_BIGENDIAN takes precedence
-#if defined(_HOST_BIG_ENDIAN) || defined(__BIG_ENDIAN__) || defined(WORDS_BIGENDIAN)
-#   define CMS_USE_BIG_ENDIAN      1
-#endif
-
 
 // Calling convention -- this is hardly platform and compiler dependent
 #ifdef CMS_IS_WINDOWS_
@@ -1507,7 +1509,6 @@ CMSAPI cmsIOHANDLER*     CMSEXPORT cmsOpenIOhandlerFromFile(cmsContext ContextID
 CMSAPI cmsIOHANDLER*     CMSEXPORT cmsOpenIOhandlerFromStream(cmsContext ContextID, FILE* Stream);
 CMSAPI cmsIOHANDLER*     CMSEXPORT cmsOpenIOhandlerFromMem(cmsContext ContextID, void *Buffer, cmsUInt32Number size, const char* AccessMode);
 CMSAPI cmsIOHANDLER*     CMSEXPORT cmsOpenIOhandlerFromNULL(cmsContext ContextID);
-CMSAPI cmsIOHANDLER*     CMSEXPORT cmsGetProfileIOhandler(cmsHPROFILE hProfile);
 CMSAPI cmsBool           CMSEXPORT cmsCloseIOhandler(cmsIOHANDLER* io);
 
 // MD5 message digest --------------------------------------------------------------------------------------------------

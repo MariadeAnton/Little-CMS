@@ -198,7 +198,7 @@ cmsINLINE cmsUInt16Number _cmsQuickSaturateWord(cmsFloat64Number d)
 
 typedef CRITICAL_SECTION _cmsMutex;
 
-#define CMS_MUTEX_INITIALIZER {(PRTL_CRITICAL_SECTION_DEBUG) -1,-1,0,0,0,0}
+#define CMS_MUTEX_INITIALIZER {(void*) -1,-1,0,0,0,0}
 
 cmsINLINE int _cmsLockPrimitive(_cmsMutex *m)
 {
@@ -284,38 +284,38 @@ typedef int _cmsMutex;
 
 cmsINLINE int _cmsLockPrimitive(_cmsMutex *m)
 {
-    cmsUNUSED_PARAMETER(m);
 	return 0;
+    cmsUNUSED_PARAMETER(m);
 }
 
 cmsINLINE int _cmsUnlockPrimitive(_cmsMutex *m)
 {
-    cmsUNUSED_PARAMETER(m);
 	return 0;
+    cmsUNUSED_PARAMETER(m);
 }
 	
 cmsINLINE int _cmsInitMutexPrimitive(_cmsMutex *m)
 {
-    cmsUNUSED_PARAMETER(m);
 	return 0;
+    cmsUNUSED_PARAMETER(m);
 }
 
 cmsINLINE int _cmsDestroyMutexPrimitive(_cmsMutex *m)
 {
-    cmsUNUSED_PARAMETER(m);
 	return 0;
+    cmsUNUSED_PARAMETER(m);
 }
 
 cmsINLINE int _cmsEnterCriticalSectionPrimitive(_cmsMutex *m)
 {
-    cmsUNUSED_PARAMETER(m);
 	return 0;
+    cmsUNUSED_PARAMETER(m);
 }
 
 cmsINLINE int _cmsLeaveCriticalSectionPrimitive(_cmsMutex *m)
 {
-    cmsUNUSED_PARAMETER(m);
 	return 0;
+    cmsUNUSED_PARAMETER(m);
 }
 #endif
 

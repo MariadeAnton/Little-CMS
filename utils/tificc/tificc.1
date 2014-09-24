@@ -1,29 +1,25 @@
 .\"Shiju P. Nair September 30, 2004
-.\"Thomas Weber <tweber@debian.org> April 23, 2014
-.TH TIFICC 1 "October 23, 2004"
-.SH NAME
-tificc - little cms ICC profile applier for TIFF.
+.TH TIFFICC 1 "October 23, 2004"
+.SH NAME 
+tifficc - little cms ICC profile applier for TIFF.
 .SH SYNOPSIS
-.B tificc
+.B tifficc
 .RI [ options ] " input.tif output.tif"
 .SH DESCRIPTION
 lcms is a standalone CMM engine, which deals with the color management.
 It implements a fast transformation between ICC profiles.
-.B tificc
-is a little cms ICC profile applier for TIFF.
+.B tifficc 
+is little cms ICC profile applier for TIFF.
 .SH OPTIONS
 .TP
 .B \-a
 Handle channels > 4 as alpha.
 .TP
-.B \-b
+.B \-b 
 Black point compensation.
 .TP
-.BI \-c\  NUM
-Precalculates transform (0=Off, 1=Normal, 2=Hi-res, 3=LoRes) [defaults to 1].
-.TP
-.BI \-d\  NUM
-Observer adaptation state (abs.col. only), (0..1.0, float value) [defaults to 0.0].
+.B \-c <0,1,2,3>
+Precalculates transform. (0=Off, 1=Normal, 2=Hi-res, 3=LoRes) [defaults to 1]
 .TP
 .B \-e
 Embed destination profile.
@@ -31,87 +27,74 @@ Embed destination profile.
 .B \-g
 Marks out-of-gamut colors on softproof.
 .TP
-.BI \-h\  NUM
-Show summary of options and examples (0=help, 1=Examples, 2=Built-in profiles, 3=Contact information)
+.B \-h <0,1,2>
+Show summary of options and examples.
 .TP
 .BI \-i\ profile
 Input profile (defaults to sRGB).
 .TP
-.BI \-k\  inklimit
-Ink-limiting in % (CMYK only), (0..400.0, float value) [default 400.0].
+.B -k <0..400> 
+Ink-limiting in % (CMYK only).
 .TP
 .BI \-l\ profile
 Transform by device-link profile.
 .TP
-.B \-m TODO: check if values outside 0..3 are possible
-SoftProof intent [defaults to 0].
+.B \-m <0,1,2,3>
+SoftProof intent.
 .TP
 .B \-n
 Ignore embedded profile on input.
 .TP
-.BI \-o\  profile
-Output profile (defaults to sRGB).
-.TP
 .BI \-p\  profile
 Soft proof profile.
 .TP
-.BI \-s\  newprofile
-Save embedded profile as \fInewprofile\fR.
+.BI \-o\  profile
+.p
+Output profile (defaults to sRGB).
 .TP
-.BI \-t\ NUM
-Rendering intent
-.nf
-.RS
-0=Perceptual [default]
-1=Relative colorimetric
-2=Saturation
-3=Absolute colorimetric
-10=Perceptual preserving black ink
-11=Relative colorimetric preserving black ink
-12=Saturation preserving black ink
-13=Perceptual preserving black plane
-14=Relative colorimetric preserving black plane
-15=Saturation preserving black plane
-.RE
-.fi
+.BI \-s\  profile
+Save embedded profile as <new profile>
+.TP
+.B \-t <0,1,2,3>
+Intent (0=Perceptual, 1=Colorimetric, 2=Saturation, 3=Absolute).
 .TP
 .B \-v
 Verbose.
 .TP
-.BI \-w\  NUM
-Output depth (8, 16 or 32). Use 32 for floating-point.
-.SH BUILT-IN PROFILES
-.nf
-	*Lab2  -- D50-based v2 CIEL*a*b
-	*Lab4  -- D50-based v4 CIEL*a*b
-	*Lab   -- D50-based v4 CIEL*a*b
-	*XYZ   -- CIE XYZ (PCS)
-	*sRGB  -- sRGB color space
-	*Gray22 - Monochrome of Gamma 2.2
-	*Gray30 - Monochrome of Gamma 3.0
-	*null   - Monochrome black for all input
-	*Lin2222- CMYK linearization of gamma 2.2 on each channel
-.fi
+.B \-w
+Wide output (generates 16 bps tiff).
+.TP
+You can also use following builtins 
+*Lab - CIE Lab D50 based 
+*XYZ - XYZ 
+*adobe1998RBB - AdobeRGB
+*colormatchrgb - ColorMatch RGB
+*applergb - Apple RGB
 .SH EXAMPLES
 .nf
 To color correct from scanner to sRGB:
-	tificc -iscanner.icm in.tif out.tif
+	tifficc -iscanner.icm in.tif out.tif
+
 To convert from monitor1 to monitor2:
-	tificc -imon1.icm -omon2.icm in.tif out.tif
+	tifficc -imon1.icm -omon2.icm in.tif out.tif
+	
 To make a CMYK separation:
-	tificc -oprinter.icm inrgb.tif outcmyk.tif
+	tifficc -oprinter.icm inrgb.tif outcmyk.tif
+	
 To recover sRGB from a CMYK separation:
-	tificc -iprinter.icm incmyk.tif outrgb.tif
+	tifficc -iprinter.icm incmyk.tif outrgb.tif
+
 To convert from CIELab TIFF to sRGB
-	tificc -i*Lab in.tif out.tif
-.fi
+	tifficc -iTiffLab8Spac.icm in.tif out.tif
+.fi				
 .SH NOTES
 For suggestions, comments, bug reports etc. send mail to info@littlecms.com.
 .SH SEE ALSO
-.BR jpgicc (1),
-.BR linkicc (1),
-.BR psicc (1),
-.BR transicc (1)
+.BR jpegicc (1),
+.BR icc2ps (1),
+.BR icclink (1),
+.BR icctrans (1),
+.BR wtpt (1)
 .SH AUTHOR
 This manual page was originally written by Shiju p. Nair <shiju.p@gmail.com>,
 for the Debian project. Modified by Marti Maria to reflect further changes.

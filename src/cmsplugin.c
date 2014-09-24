@@ -880,7 +880,7 @@ cmsContext CMSEXPORT cmsDupContext(cmsContext ContextID, void* NewUserData)
 }
 
 
-/*
+
 static
 struct _cmsContext_struct* FindPrev(struct _cmsContext_struct* id)
 {
@@ -897,7 +897,6 @@ struct _cmsContext_struct* FindPrev(struct _cmsContext_struct* id)
 
     return NULL;  // List is empty or only one element!
 }
-*/
 
 // Frees any resources associated with the given context, 
 // and destroys the context placeholder. 
@@ -933,8 +932,8 @@ void CMSEXPORT cmsDeleteContext(cmsContext ContextID)
 
             // Search for previous
             for (prev = _cmsContextPoolHead; 
-                 prev != NULL;
-                 prev = prev ->Next)
+                prev != NULL;
+                prev = prev ->Next)
             {
                 if (prev -> Next == ctx) {
                     prev -> Next = ctx ->Next;

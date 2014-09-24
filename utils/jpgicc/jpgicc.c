@@ -27,7 +27,7 @@
 
 #include "utils.h"
 
-#include "jpeglib.h"
+#include "jpeg/jpeg/jpeglib.h"
 #include "iccjpeg.h"
 
 // Flags
