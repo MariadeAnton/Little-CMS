@@ -26,7 +26,7 @@
 // This program does apply profiles to (some) TIFF files
 
 #include "lcms2_plugin.h"
-#include "tiffio.h"
+#include "tiff/tiff/libtiff/tiffio.h"
 #include "utils.h"
 
 

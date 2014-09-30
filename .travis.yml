@@ -1,0 +1,27 @@
+language: cpp
+compiler:
+- gcc
+before_install:
+- sudo apt-get update -qq
+install:
+- wget http://www.biicode.com/downloads/latest/ubuntu64
+- mv ubuntu64 bii-ubuntu64.deb
+- "(! sudo dpkg -i bii-ubuntu64.deb ) && sudo apt-get -f install"
+- rm bii-ubuntu64.deb
+- wget http://www.cmake.org/files/v3.0/cmake-3.0.1-Linux-i386.tar.gz
+- tar -xzf cmake-3.0.1-Linux-i386.tar.gz
+- sudo cp -fR cmake-3.0.1-Linux-i386/* /usr
+- rm -rf cmake-3.0.1-Linux-i386
+- rm cmake-3.0.1-Linux-i386.tar.gz
+script:
+- cmake --version
+- bii init biicode_project
+- mkdir -p ./biicode_project/blocks/amalulla/bcl
+- mv !(biicode_project) ./biicode_project/blocks/amalulla/bcl
+- cd biicode_project
+- bii find -um
+- bii cpp:build
+- "./bin/ && ls ./bin/amalulla_bcl_src_bfc"
+after_success:
+- bii user amalulla -p $BII_AMALULLA_PASSWORD
+- bii publish --tag STABLE

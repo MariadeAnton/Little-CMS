@@ -21,7 +21,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-#include "lcms.h"
+#include "lcms2.h"
 
 // This is a sample on how to build a profile for decoding ITU T.42/Fax JPEG
 // streams. The profile has an additional ability in the input direction of

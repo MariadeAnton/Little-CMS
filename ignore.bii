@@ -1,0 +1,6 @@
+testbed/*
+utils/samples/mkgrayer.c
+utils/samples/itufax.c
+utils/samples/mkcmy.c
+utils/samples/wtpt.c
+utils/matlab/*

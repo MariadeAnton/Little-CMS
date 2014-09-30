@@ -31,7 +31,7 @@
 // Example: how to show white points of profiles
 
 
-#include "lcms.h"
+#include "lcms2.h"
 
 
 

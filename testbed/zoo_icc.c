@@ -26,9 +26,6 @@
 
 
 #include "testcms2.h"
-#include "stdint.h"
-#include "dos.h"
-#include "jpeg/jpeg/jpeglib.h"
 
 
 // ZOO checks ------------------------------------------------------------------------------------------------------------

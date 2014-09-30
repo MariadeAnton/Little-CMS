@@ -26,7 +26,7 @@
 // Version 1.12
 
 
-#include "lcms.h"
+#include "lcms2.h"
 
 
 typedef struct {
