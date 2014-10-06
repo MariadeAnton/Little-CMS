@@ -14,4 +14,8 @@ by Marti Maria
 
 Version 2.6
 
+#Include this file in biicode:
+
+   #include "martimaria/littlecms/include/lcms2.h"
+
 ## Please see the documentation in doc folder
